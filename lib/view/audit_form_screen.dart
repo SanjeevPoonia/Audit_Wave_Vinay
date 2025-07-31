@@ -77,8 +77,8 @@ class AuditFormState extends State<AuditFormScreen> {
   List<int> scoredList = [];
   String userEnteredOTP = '';
   String userEnteredOTP2 = '';
-  List<String> selectedLevel4Drop = [];
-  List<String> selectedLevel5Drop = [];
+  List<String?> selectedLevel4Drop = [];
+  List<String?> selectedLevel5Drop = [];
   var presentAuditorController=TextEditingController();
   TextEditingController textEditingController = TextEditingController();
   TextEditingController textEditingController2 = TextEditingController();
@@ -817,7 +817,7 @@ class AuditFormState extends State<AuditFormScreen> {
                                   padding:
                                   const EdgeInsets.only(
                                       left: 12),
-                                  child: Text("Level 3",
+                                  child: Text("Level 3*",
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight:
@@ -981,11 +981,15 @@ class AuditFormState extends State<AuditFormScreen> {
                                         onTap: () {
                                           setState(() {
                                             selectedLevel4Drop.add(
+                                                null);
+                                            selectedLevel5Drop.add(
+                                                null);
+                                            /*selectedLevel4Drop.add(
                                                 level4ListAsString[
                                                 0]);
                                             selectedLevel5Drop.add(
                                                 level5ListAsString[
-                                                0]);
+                                                0]);*/
                                             levelWiseCount =
                                                 levelWiseCount +
                                                     1;
@@ -1018,6 +1022,14 @@ class AuditFormState extends State<AuditFormScreen> {
                                         (BuildContext
                                     context,
                                         int pos) {
+
+                                      int level4Count=4+pos*2;
+                                      int level5Count=5+pos*2;
+
+
+                                      String level4Title="Level $level4Count *";
+                                      String level5Title="Level $level5Count *";
+
                                       return Column(
                                         crossAxisAlignment:
                                         CrossAxisAlignment
@@ -1027,7 +1039,7 @@ class AuditFormState extends State<AuditFormScreen> {
                                               ? Container()
                                               :
                                           widget.isEdit ? Container() :
-                                          SizedBox(
+                                          const SizedBox(
                                               height:
                                               10),
                                           pos == 0
@@ -1065,7 +1077,7 @@ class AuditFormState extends State<AuditFormScreen> {
                                                 left:
                                                 12),
                                             child: Text(
-                                                "Level 4",
+                                                level4Title,
                                                 style:
                                                 TextStyle(
                                                   fontSize:
@@ -1165,13 +1177,11 @@ class AuditFormState extends State<AuditFormScreen> {
 
                                           Row(
                                             children: [
-
-
                                               Expanded(child: Container(
                                                 margin: EdgeInsets.symmetric(
                                                     horizontal: 10),
                                                 child: CustomDropdown<String>.search(
-                                                  hintText: 'Select Level 4',
+                                                  hintText: 'Select $level4Title',
                                                   items: level4ListAsString,
 
                                                   decoration: CustomDropdownDecoration(
@@ -1197,16 +1207,13 @@ class AuditFormState extends State<AuditFormScreen> {
                                                   overlayHeight: 342,
                                                   initialItem:selectedLevel4Drop[pos],
                                                   onChanged: (value) {
-                                                    log('SearchDropdown onChanged value: $value');
+                                                    log('SearchDropdown onChanged value4: $value');
                                                     setState(() {
                                                       selectedLevel4Drop[pos] = value.toString();
                                                     });
                                                   },
                                                 ),
                                               ))
-
-
-
                                             ],
                                           ),
 
@@ -1221,7 +1228,7 @@ class AuditFormState extends State<AuditFormScreen> {
                                                 left:
                                                 12),
                                             child: Text(
-                                                "Level 5",
+                                                level5Title,
                                                 style:
                                                 TextStyle(
                                                   fontSize:
@@ -1328,7 +1335,7 @@ class AuditFormState extends State<AuditFormScreen> {
                                                 margin: EdgeInsets.symmetric(
                                                     horizontal: 10),
                                                 child: CustomDropdown<String>.search(
-                                                  hintText: 'Select Level 5',
+                                                  hintText: 'Select $level5Title',
                                                   items: level5ListAsString,
                                                   decoration: CustomDropdownDecoration(
                                                     closedBorder:  Border.all(
@@ -1678,10 +1685,20 @@ class AuditFormState extends State<AuditFormScreen> {
                                                                                       questionList[pos]["subparameter"][index]["weight"]
                                                                                           .toString();
 
-                                                                                  scoreInPercentage[pos] =
+                                                                                  if(scorableList[pos]==0){
+                                                                                    scoreInPercentage[pos] =0.0;
+                                                                                  }else{
+                                                                                    scoreInPercentage[pos] =
+                                                                                        (scoredList[pos] *
+                                                                                            100) /
+                                                                                            scorableList[pos];
+                                                                                  }
+                                                                                 /* scoreInPercentage[pos] =
                                                                                       (scoredList[pos] *
                                                                                           100) /
-                                                                                          scorableList[pos];
+                                                                                          scorableList[pos];*/
+
+
                                                                                 } else {
                                                                                   print(
                                                                                       "NO ANSWER SELEC");
@@ -1706,10 +1723,18 @@ class AuditFormState extends State<AuditFormScreen> {
                                                                                     scoredList[pos] =
                                                                                         scoredList[pos] +
                                                                                             0;
-                                                                                    scoreInPercentage[pos] =
+                                                                                    if(scorableList[pos]==0){
+                                                                                      scoreInPercentage[pos] =0.0;
+                                                                                    }else{
+                                                                                      scoreInPercentage[pos] =
+                                                                                          (scoredList[pos] *
+                                                                                              100) /
+                                                                                              scorableList[pos];
+                                                                                    }
+                                                                                    /*scoreInPercentage[pos] =
                                                                                         (scoredList[pos] *
                                                                                             100) /
-                                                                                            scorableList[pos];
+                                                                                            scorableList[pos];*/
                                                                                   } else {
                                                                                     print(
                                                                                         "Item exists");
@@ -1735,10 +1760,19 @@ class AuditFormState extends State<AuditFormScreen> {
                                                                                                         .toString());
                                                                                       }
 
-                                                                                    scoreInPercentage[pos] =
+                                                                                    if(scorableList[pos]==0){
+                                                                                      scoreInPercentage[pos] =0.0;
+                                                                                    }else{
+                                                                                      scoreInPercentage[pos] =
+                                                                                          (scoredList[pos] *
+                                                                                              100) /
+                                                                                              scorableList[pos];
+                                                                                    }
+
+                                                                                    /*scoreInPercentage[pos] =
                                                                                         (scoredList[pos] *
                                                                                             100) /
-                                                                                            scorableList[pos];
+                                                                                            scorableList[pos];*/
                                                                                   }
                                                                                 }
 
@@ -2218,10 +2252,18 @@ class AuditFormState extends State<AuditFormScreen> {
                                                                                       questionList[pos]["qm_sheet_sub_parameter"][index]["weight"]
                                                                                           .toString();
 
-                                                                                  scoreInPercentage[pos] =
+                                                                                  if(scorableList[pos]==0){
+                                                                                    scoreInPercentage[pos] =0.0;
+                                                                                  }else{
+                                                                                    scoreInPercentage[pos] =
+                                                                                        (scoredList[pos] *
+                                                                                            100) /
+                                                                                            scorableList[pos];
+                                                                                  }
+                                                                                  /*scoreInPercentage[pos] =
                                                                                       (scoredList[pos] *
                                                                                           100) /
-                                                                                          scorableList[pos];
+                                                                                          scorableList[pos];*/
                                                                                 } else {
                                                                                   print(
                                                                                       "NO ANSWER SELEC");
@@ -2246,10 +2288,18 @@ class AuditFormState extends State<AuditFormScreen> {
                                                                                     scoredList[pos] =
                                                                                         scoredList[pos] +
                                                                                             0;
-                                                                                    scoreInPercentage[pos] =
+                                                                                    if(scorableList[pos]==0){
+                                                                                      scoreInPercentage[pos] =0.0;
+                                                                                    }else{
+                                                                                      scoreInPercentage[pos] =
+                                                                                          (scoredList[pos] *
+                                                                                              100) /
+                                                                                              scorableList[pos];
+                                                                                    }
+                                                                                   /* scoreInPercentage[pos] =
                                                                                         (scoredList[pos] *
                                                                                             100) /
-                                                                                            scorableList[pos];
+                                                                                            scorableList[pos];*/
                                                                                   } else {
                                                                                     print(
                                                                                         "Item exists");
@@ -2275,10 +2325,20 @@ class AuditFormState extends State<AuditFormScreen> {
                                                                                     weightList[pos][index] =
                                                                                     "0";
 
-                                                                                    scoreInPercentage[pos] =
+                                                                                    if(scorableList[pos]==0){
+                                                                                      scoreInPercentage[pos] =0.0;
+                                                                                    }else{
+                                                                                      scoreInPercentage[pos] =
+                                                                                          (scoredList[pos] *
+                                                                                              100) /
+                                                                                              scorableList[pos];
+                                                                                    }
+                                                                                    /*scoreInPercentage[pos] =
                                                                                         (scoredList[pos] *
                                                                                             100) /
-                                                                                            scorableList[pos];
+                                                                                            scorableList[pos];*/
+
+
                                                                                   }
                                                                                 }
 
@@ -2974,6 +3034,34 @@ class AuditFormState extends State<AuditFormScreen> {
     );
   }
 
+  bool checkLevelsValidation(){
+    ToastContext().init(context);
+    bool validation=true;
+    if(selectedlevel1!=null){
+
+      bool allSelected = !selectedLevel4Drop.contains(null) && !selectedLevel5Drop.contains(null);
+     if(!allSelected){
+       Toast.show("Please select all levels before continuing",
+           duration: Toast.lengthLong,
+           gravity: Toast.bottom,
+           backgroundColor: Colors.red);
+       validation=false;
+     }else{
+       validation=true;
+     }
+
+    }else{
+      Toast.show("Please select Level 3",
+          duration: Toast.lengthLong,
+          gravity: Toast.bottom,
+          backgroundColor: Colors.red);
+      validation=false;
+    }
+
+
+
+    return validation;
+  }
   checkValidations(String methodType) {
     ToastContext().init(context);
     if (selectedAgencyIndex == 9999) {
@@ -2992,7 +3080,6 @@ class AuditFormState extends State<AuditFormScreen> {
           gravity: Toast.bottom,
           backgroundColor: Colors.red);
     }
-
     else if(presentAuditorController.text=="" && !widget.isEdit)
     {
       Toast.show("Please enter Present Auditor name!",
@@ -3000,22 +3087,18 @@ class AuditFormState extends State<AuditFormScreen> {
           gravity: Toast.bottom,
           backgroundColor: Colors.red);
     }
-
-
     else if (latLongController.text == "") {
       Toast.show("Geo tag not found",
           duration: Toast.lengthLong,
           gravity: Toast.bottom,
           backgroundColor: Colors.red);
+    }else if(!checkLevelsValidation()){
+      print("There is a validation error with Level");
     }
-
-
-
     else {
       bool flag = true;
       if (widget.isEdit) {
         //subparameter
-
         outerLoop:
         for (int i = 0; i < questionList.length; i++) {
           for (int j = 0; j < questionList[i]["subparameter"].length; j++) {
@@ -3087,10 +3170,14 @@ class AuditFormState extends State<AuditFormScreen> {
         } else {
           String idDummy = "133";
           String idDummyStaging = "131";
-          String id = "82";
+         /* String id = "82";
           String id1 = "62";
-          String id2 = "42";
+          String id2 = "42";*/
+          String id = "184";
+          String id1 = "151";
+          String id2 = "218";
           String idStaging = "42";
+
           String question = "Check collection manager";
           String question2 = "Presence Of Banker During Process Review (Mention the reason with product name (Cards/Retail/MSME) in remarks if UNSATISFACTORY)";
           collectionManagerSelected = false;
@@ -3157,7 +3244,6 @@ class AuditFormState extends State<AuditFormScreen> {
 
           print("COLLL");
           print(collectionManagerSelected.toString());
-
           // prepareData("submit");
           sendOTP("");
         }
@@ -3168,13 +3254,13 @@ class AuditFormState extends State<AuditFormScreen> {
   }
 
   prepareData(String methodType) async {
-    if (level4IDs.length != 0) {
+    if (level4IDs.isNotEmpty) {
       level4IDs.clear();
     }
-    if (level5IDs.length != 0) {
+    if (level5IDs.isNotEmpty) {
       level5IDs.clear();
     }
-    APIDialog.showAlertDialog(context, "Submitting Audit...");
+    APIDialog.showAlertDialog(context, methodType=="save"?"Saving Audit...":"Submitting Audit...");
 
     print(selectedLevel4Drop.toString());
     print(selectedLevel5Drop.toString());
@@ -3196,20 +3282,24 @@ class AuditFormState extends State<AuditFormScreen> {
         print(selectedLevel4Drop[i]);
         print(level4UserList[j]["name"]);
 
-        if (selectedLevel4Drop[i] == level4UserList[j]["name"]) {
-          flag = true;
-          print("LOOP DATA 22");
-          level4IDs.add(level4UserList[j]["id"].toString());
-          break;
+        if(selectedLevel4Drop[i]!=null) {
+          if (selectedLevel4Drop[i] == level4UserList[j]["name"]) {
+            flag = true;
+            print("LOOP DATA 22");
+            level4IDs.add(level4UserList[j]["id"].toString());
+            break;
+          }
         }
       }
     }
 
     for (int i = 0; i < selectedLevel5Drop.length; i++) {
       for (int j = 0; j < level5Users.length; j++) {
-        if (selectedLevel5Drop[i] == level5Users[j]["name"]) {
-          level5IDs.add(level5Users[j]["id"].toString());
-          break;
+        if(selectedLevel5Drop[i]!=null) {
+          if (selectedLevel5Drop[i] == level5Users[j]["name"]) {
+            level5IDs.add(level5Users[j]["id"].toString());
+            break;
+          }
         }
       }
     }
@@ -3413,8 +3503,7 @@ class AuditFormState extends State<AuditFormScreen> {
         "lavel_4": level4IDs,
         "lavel_5": level5IDs,
         "grade": finalGrade,
-        "with_fatal_score_per":
-        scoreInPercentage.reduce((a, b) => a + b).toStringAsFixed(2) + "%",
+        "with_fatal_score_per": "${scoreInPercentage.reduce((a, b) => a + b).toStringAsFixed(2)}%",
         "sub_product_ids": selectedSubProductIDsAsString
             .toString()
             .substring(1, selectedSubProductIDsAsString
@@ -3460,8 +3549,7 @@ class AuditFormState extends State<AuditFormScreen> {
         "lavel_4": level4IDs,
         "lavel_5": level5IDs,
         "grade": finalGrade,
-        "with_fatal_score_per":
-        scoreInPercentage.reduce((a, b) => a + b).toStringAsFixed(2) + "%",
+        "with_fatal_score_per": "${scoreInPercentage.reduce((a, b) => a + b).toStringAsFixed(2)}%",
         "sub_product_ids": selectedSubProductIDsAsString
             .toString()
             .substring(1, selectedSubProductIDsAsString
@@ -3817,8 +3905,6 @@ class AuditFormState extends State<AuditFormScreen> {
           });
         });
   }
-
-
   void otpVerifyDialogManager(BuildContext context) {
     showDialog(
         context: context,
@@ -5745,8 +5831,6 @@ class AuditFormState extends State<AuditFormScreen> {
 
     setState(() {});
   }
-
-
   verifyOTPManager() async {
     APIDialog.showAlertDialog(context, "Verifying OTP...");
     String level1ID = "";
@@ -5793,8 +5877,6 @@ class AuditFormState extends State<AuditFormScreen> {
 
     setState(() {});
   }
-
-
   sendOTPToCollectionManager(bool resendOTP) async {
     APIDialog.showAlertDialog(context, "Sending OTP...");
     //subparameter
@@ -6448,7 +6530,8 @@ class AuditFormState extends State<AuditFormScreen> {
     for (int i = 0; i < level5Users.length; i++) {
       level5ListAsString.add(level5Users[i]["name"]);
       if (i == 0) {
-        selectedLevel5Drop.add(level5Users[0]["name"]);
+        selectedLevel5Drop.add(null);
+        //selectedLevel5Drop.add(level5Users[0]["name"]);
       }
     }
 
@@ -6465,13 +6548,14 @@ class AuditFormState extends State<AuditFormScreen> {
     for (int i = 0; i < level4UserList.length; i++) {
       level4ListAsString.add(level4UserList[i]["name"]);
       if (i == 0) {
-        selectedLevel4Drop.add(level4UserList[0]["name"]);
+        selectedLevel4Drop.add(null);
+       // selectedLevel4Drop.add(level4UserList[0]["name"]);
       }
     }
 
-    selectedlevel1 = levelByUserList[0].toString();
+   /* selectedlevel1 = levelByUserList[0].toString();
     selectedlevel2 = levelByUserList[0].toString();
-    selectedlevel3 = levelByUserList[0].toString();
+    selectedlevel3 = levelByUserList[0].toString();*/
 
     setState(() {});
   }

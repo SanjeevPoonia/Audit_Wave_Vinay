@@ -145,9 +145,9 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                            left: 12),
                                      ),
                                      iconStyleData:
-                                     IconStyleData(
+                                     const IconStyleData(
                                        icon: Padding(
-                                         padding: const EdgeInsets.only(right: 5),
+                                         padding: EdgeInsets.only(right: 5),
                                          child: Icon(
                                              Icons
                                                  .keyboard_arrow_down_outlined,
@@ -282,7 +282,7 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                              SizedBox(height: 9),
 
 
-                                             Padding(
+                                             const Padding(
                                                padding:  EdgeInsets.only(left: 5),
                                                child: Text("Total Assigned\nAudits",style: TextStyle(
                                                  fontSize: 15.0,
@@ -293,7 +293,7 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                              SizedBox(height: 10),
                                              Padding(
                                                padding: const EdgeInsets.only(left: 5),
-                                               child: Text(assignedAuditsCount,style: TextStyle(
+                                               child: Text(assignedAuditsCount,style: const TextStyle(
                                                  fontSize: 24.0,
                                                  fontWeight: FontWeight.w600,
                                                  color: AppTheme.themeColor,
@@ -315,7 +315,7 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                      ),
                                    ))),
 
-                               SizedBox(width: 12),
+                               const SizedBox(width: 12),
                                Expanded(flex: 1, child: InkWell(
                                    onTap: (){
                                    //  Navigator.push(context, MaterialPageRoute(builder: (context)=>SavedAuditListScreen()));
@@ -323,10 +323,10 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                    },
 
                                    child:  Container(
-                                     padding: EdgeInsets.all(5),
+                                     padding: const EdgeInsets.all(5),
                                      decoration: BoxDecoration(
                                        borderRadius: BorderRadius.circular(15),
-                                       color: Color(0xFfe6f2ff),
+                                       color: const Color(0xFfe6f2ff),
                                      ),
                                      height: 110,
                                      child: Stack(
@@ -336,7 +336,7 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                            children: [
 
 
-                                             Spacer(),
+                                             const Spacer(),
                                              Container(
                                                  transform: Matrix4.translationValues(9.0, -5.0, 0.0),
                                                  child: Image.asset("assets/pen_audit_ic.png",width: 93,height: 111,))
@@ -350,7 +350,7 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                              SizedBox(height: 9),
 
 
-                                             Padding(
+                                             const Padding(
                                                padding:  EdgeInsets.only(left: 5),
                                                child: Text("Total Pending\nAudits",style: TextStyle(
                                                  fontSize: 15.0,
@@ -358,10 +358,10 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                                  color: Colors.black,
                                                )),
                                              ),
-                                             SizedBox(height: 10),
+                                             const SizedBox(height: 10),
                                              Padding(
                                                padding: const EdgeInsets.only(left: 5),
-                                               child: Text(pendingAuditsCount,style: TextStyle(
+                                               child: Text(pendingAuditsCount,style: const TextStyle(
                                                  fontSize: 24.0,
                                                  fontWeight: FontWeight.w600,
                                                  color: AppTheme.themeColor,
@@ -386,7 +386,7 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                            ),
                          ),
 
-                         SizedBox(height: 10),
+                         const SizedBox(height: 10),
 
                          Padding(
                            padding: const EdgeInsets.symmetric(horizontal: 9),
@@ -413,7 +413,7 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                            children: [
 
 
-                                             Spacer(),
+                                             const Spacer(),
                                              Container(
                                                  transform: Matrix4.translationValues(5.0, -11.0, 0.0),
                                                  child: Image.asset("assets/tiles_5.png",width: 93,height: 111,))
@@ -424,10 +424,10 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                            crossAxisAlignment: CrossAxisAlignment.start,
                                            children: [
 
-                                             SizedBox(height: 9),
+                                             const SizedBox(height: 9),
 
 
-                                             Padding(
+                                             const Padding(
                                                padding:  EdgeInsets.only(left: 5),
                                                child: Text("Total Submitted\nAudits",style: TextStyle(
                                                  fontSize: 15.0,
@@ -435,10 +435,10 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                                  color: Colors.black,
                                                )),
                                              ),
-                                             SizedBox(height: 10),
+                                             const SizedBox(height: 10),
                                              Padding(
                                                padding: const EdgeInsets.only(left: 5),
-                                               child: Text(submittedAuditsCount,style: TextStyle(
+                                               child: Text(submittedAuditsCount,style: const TextStyle(
                                                  fontSize: 24.0,
                                                  fontWeight: FontWeight.w600,
                                                  color: AppTheme.themeColor,
@@ -460,7 +460,7 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                      ),
                                    ))),
 
-                               SizedBox(width: 12),
+                               const SizedBox(width: 12),
                                Expanded(flex: 1, child: InkWell(
 
                                    onTap: (){
@@ -469,10 +469,10 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                    },
 
                                    child:  Container(
-                                     padding: EdgeInsets.all(5),
+                                     padding: const EdgeInsets.all(5),
                                      decoration: BoxDecoration(
                                        borderRadius: BorderRadius.circular(15),
-                                       color: Color(0xFfe6f2ff),
+                                       color: const Color(0xFfe6f2ff),
                                      ),
                                      height: 110,
                                      child: Stack(
@@ -482,7 +482,7 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                            children: [
 
 
-                                             Spacer(),
+                                             const Spacer(),
                                              Container(
                                                  transform: Matrix4.translationValues(6.0, -4.0, 0.0),
                                                  child: Image.asset("assets/card4.png",width: 93,height: 90,opacity: const AlwaysStoppedAnimation(.2)))
@@ -493,10 +493,10 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                            crossAxisAlignment: CrossAxisAlignment.start,
                                            children: [
 
-                                             SizedBox(height: 9),
+                                             const SizedBox(height: 9),
 
 
-                                             Padding(
+                                             const Padding(
                                                padding:  EdgeInsets.only(left: 5),
                                                child: Text("Total Saved\nAudits",style: TextStyle(
                                                  fontSize: 15.0,
@@ -504,10 +504,10 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
                                                  color: Colors.black,
                                                )),
                                              ),
-                                             SizedBox(height: 10),
+                                             const SizedBox(height: 10),
                                              Padding(
                                                padding: const EdgeInsets.only(left: 5),
-                                               child: Text(savedAuditsCount,style: TextStyle(
+                                               child: Text(savedAuditsCount,style: const TextStyle(
                                                  fontSize: 24.0,
                                                  fontWeight: FontWeight.w600,
                                                  color: AppTheme.themeColor,
@@ -562,12 +562,12 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
   }
 
 
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     checkInternet();
-
     menuController = MEN.MenuController(
       vsync: this,
     )..addListener(() => setState(() {}));
@@ -583,7 +583,6 @@ class LandingState extends State<QAHomeScreen> with TickerProviderStateMixin
     }
     else
       {
-
         fetchDashboardData(false);
       }
   }

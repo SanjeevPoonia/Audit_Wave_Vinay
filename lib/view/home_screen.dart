@@ -115,38 +115,28 @@ class LandingState extends State<HomeScreen> with TickerProviderStateMixin
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-
                               Text(auditList[pos]["name"],
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w700,
                                     color: Colors.black,
                                   )),
-
                               SizedBox(height: 5),
-
                               Row(
                                 children: [
-
                                   Text("Sheet Type",
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.grey,
                                       )),
-
                                   SizedBox(width: 10),
-
                                   Text(auditList[pos]["type"],
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black,
                                       )),
-
-
-
-
                                 ],
                               ),
 
@@ -154,16 +144,13 @@ class LandingState extends State<HomeScreen> with TickerProviderStateMixin
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-
                                   Text("Lob",
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.grey,
                                       )),
-
                                   SizedBox(width: 10),
-
                                   Text(auditList[pos]["lob"],
                                       style: TextStyle(
                                         fontSize: 14,

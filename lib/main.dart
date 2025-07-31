@@ -150,6 +150,8 @@ class MyAppState extends State<MyApp> {
     int userAppVersion = getExtendedVersionNumber(version); // return 10020003
     int storeAppVersion = getExtendedVersionNumber(versionName); // return 10020011
 
+    print("User app version final $userAppVersion");
+    print("server app version final $storeAppVersion");
 
     if(userAppVersion<storeAppVersion)
     {

@@ -49,7 +49,6 @@ class SplashState extends State<SplashScreen>
       {
 
         String? userRole=await MyUtils.getSharedPreferences("role");
-
         if(userRole=="Client")
           {
             Timer(
@@ -64,12 +63,6 @@ class SplashState extends State<SplashScreen>
                     () => Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (BuildContext context) => QAHomeScreen())));
           }
-
-
-
-
-
-
       }
     else
       {

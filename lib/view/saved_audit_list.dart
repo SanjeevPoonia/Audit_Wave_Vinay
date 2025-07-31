@@ -208,7 +208,6 @@ class SavedAuditState extends State<SavedAuditListScreen> with TickerProviderSta
                                       ],
                                     ),
                                     SizedBox(height: 10),
-
                                     Row(
                                       children: [
 
@@ -238,8 +237,6 @@ class SavedAuditState extends State<SavedAuditListScreen> with TickerProviderSta
                                       ],
                                     ),
                                     SizedBox(height: 10),
-
-
                                     Row(
                                       children: [
 
@@ -264,16 +261,12 @@ class SavedAuditState extends State<SavedAuditListScreen> with TickerProviderSta
 
                                       ],
                                     ),
-
-
-
                                     SizedBox(height: 12),
                                     Row(
                                       children: [
                                         Expanded(child: InkWell(
                                           onTap: () {
-                                            Navigator.push(context,MaterialPageRoute(builder: (context)=>AuditFormScreen(arrSavedAuditList[pos]["qm_sheet_id"].toString(),{},"Collection | Agency",true,arrSavedAuditList[pos]["audit_id"].toString(),"")));
-
+                                            Navigator.push(context,MaterialPageRoute(builder: (context)=>AuditFormScreen(arrSavedAuditList[pos]["qm_sheet_id"].toString(),{},"Collection | Agency",true,arrSavedAuditList[pos]["audit_id"].toString(),""))).then((value) => savedAuditList(context));
                                           },
                                           child: Container(
                                               margin:
