@@ -87,8 +87,7 @@ class ApiBaseHelper {
     return responseJson;
   }
 
-  Future<dynamic> postAPI(
-      String url, var apiParams, BuildContext context) async {
+  Future<dynamic> postAPI(String url, var apiParams, BuildContext context) async {
     print(_baseUrl+url+'  API CALLED');
     print(apiParams.toString());
     var responseJson;
@@ -112,8 +111,7 @@ class ApiBaseHelper {
     }
     return responseJson;
   }
-  Future<dynamic> newPostAPI(
-      String url, var apiParams, BuildContext context) async {
+  Future<dynamic> newPostAPI(String url, var apiParams, BuildContext context) async {
     print(_baseUrl1+url+'  API CALLED');
     print(apiParams.toString());
     var responseJson;
@@ -137,8 +135,7 @@ class ApiBaseHelper {
     }
     return responseJson;
   }
-  Future<dynamic> postAPIWithHeader22(
-      String url, var apiParams, BuildContext context) async {
+  Future<dynamic> postAPIWithHeader22(String url, var apiParams, BuildContext context) async {
     print(AppConstant.webURL+url+'  API CALLED');
     print("Token");
     print(AppModel.token);

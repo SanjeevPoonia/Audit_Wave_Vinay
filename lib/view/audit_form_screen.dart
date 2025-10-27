@@ -172,6 +172,9 @@ class AuditFormState extends State<AuditFormScreen> {
   StateSetter? setStateGlobal;
   StateSetter? setStateGlobalManagerDialog;
 
+
+  List<String> obsIds=[];
+
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
@@ -3186,9 +3189,7 @@ class AuditFormState extends State<AuditFormScreen> {
           if (widget.isEdit) {
             outerLoop:
             for (int i = 0; i < questionList.length; i++) {
-              for (int j = 0;
-              j < questionList[i]["subparameter"].length;
-              j++) {
+              for (int j = 0; j < questionList[i]["subparameter"].length; j++) {
                 if (questionList[i]["subparameter"][j]["id"].toString() ==
                     idDummy ||
                     questionList[i]["subparameter"][j]["id"].toString() ==
@@ -3200,7 +3201,7 @@ class AuditFormState extends State<AuditFormScreen> {
                     questionList[i]["subparameter"][j]["id"].toString() ==
                         id1 ||
                     questionList[i]["subparameter"][j]["id"].toString() ==
-                        id2) {
+                        id2 || obsIds.contains(questionList[i]["subparameter"][j]["id"].toString())) {
                   if (dropdownSelectionList[i][j] == "Satisfactory") {
                     collectionManagerSelected = true;
                     break outerLoop;
@@ -3232,7 +3233,7 @@ class AuditFormState extends State<AuditFormScreen> {
                         id1 ||
                     questionList[i]["qm_sheet_sub_parameter"][j]["id"]
                         .toString() ==
-                        id2) {
+                        id2 || obsIds.contains(questionList[i]["qm_sheet_sub_parameter"][j]["id"].toString())) {
                   if (dropdownSelectionList[i][j] == "Satisfactory") {
                     collectionManagerSelected = true;
                     break outerLoop;
@@ -5454,11 +5455,13 @@ class AuditFormState extends State<AuditFormScreen> {
 
       if (widget.isEdit) {
         viewAuditData(context);
+        fetchObsIds();
       } else {
         fetchCities();
         fetchAgencies();
         fetchAuditCycleList();
         fetchUserList();
+        fetchObsIds();
       }
     }
   }
@@ -5812,8 +5815,6 @@ class AuditFormState extends State<AuditFormScreen> {
 
       if (collectionManagerSelected) {
         sendOTPToCollectionManager(false);
-
-
         // Call send OTP API For collection Manager
       }
       else {
@@ -6477,6 +6478,31 @@ class AuditFormState extends State<AuditFormScreen> {
     }
 
     print(responseJSON);
+    setState(() {});
+  }
+
+  fetchObsIds() async {
+    setState(() {
+      isLoading = true;
+    });
+    var requestModel = {"qm_sheet_id": widget.sheetID};
+    print(requestModel);
+    ApiBaseHelper helper = ApiBaseHelper();
+    var response = await helper.getWithHeader('send-obs-ids', requestModel, context);
+    setState(() {
+      isLoading = false;
+    });
+    var responseJSON = json.decode(response.body);
+    if (responseJSON['data'] != null) {
+      obsIds
+        ..clear()
+        ..addAll(
+          (responseJSON['data'] as List)
+              .map((e) => e?.toString() ?? '')
+              .where((id) => id.isNotEmpty),
+        );
+    }
+    print("OBS Ids $obsIds");
     setState(() {});
   }
 
