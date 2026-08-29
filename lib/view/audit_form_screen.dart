@@ -3190,6 +3190,7 @@ class AuditFormState extends State<AuditFormScreen> {
             outerLoop:
             for (int i = 0; i < questionList.length; i++) {
               for (int j = 0; j < questionList[i]["subparameter"].length; j++) {
+                print("Subparam Ids: ${questionList[i]["subparameter"][j]["id"]}");
                 if (questionList[i]["subparameter"][j]["id"].toString() ==
                     idDummy ||
                     questionList[i]["subparameter"][j]["id"].toString() ==
@@ -3244,6 +3245,7 @@ class AuditFormState extends State<AuditFormScreen> {
           }
 
           print("COLLL");
+
           print(collectionManagerSelected.toString());
           // prepareData("submit");
           sendOTP("");
@@ -5785,7 +5787,6 @@ class AuditFormState extends State<AuditFormScreen> {
 
   verifyOTP() async {
     APIDialog.showAlertDialog(context, "Verifying OTP...");
-
     var requestModel = {
       "otp": userEnteredOTP,
       "agency_email": selectedEmail,
