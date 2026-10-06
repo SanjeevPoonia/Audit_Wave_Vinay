@@ -6507,14 +6507,34 @@ class AuditFormState extends State<AuditFormScreen> {
     setState(() {});
   }
 
-  fetchAuditCycleList() async {
+  /*fetchAuditCycleList() async {
     var requestModel = {};
     ApiBaseHelper helper = ApiBaseHelper();
     var response =
     await helper.getWithHeader('get_audit_cycle', requestModel, context);
-
     var responseJSON = json.decode(response.body);
+    auditCycleList = responseJSON["details"];
+    for (int i = 0; i < auditCycleList.length; i++) {
+      auditCycleListAsString.add(auditCycleList[i]["name"]);
+    }
 
+    if (auditCycleList.length != 0) {
+      selectedAuditCycle = auditCycleList[0]["name"];
+    }
+
+    print("Cycle Data");
+    print(responseJSON);
+    setState(() {});
+  }*/
+
+  fetchAuditCycleList() async {
+    var requestModel = {
+      'qm_sheet_id':widget.sheetID
+    };
+    ApiBaseHelper helper = ApiBaseHelper();
+    var response =
+    await helper.postAPIWithHeader('get_audit_cycle_product_wise', requestModel, context);
+    var responseJSON = json.decode(response.body);
     auditCycleList = responseJSON["details"];
     for (int i = 0; i < auditCycleList.length; i++) {
       auditCycleListAsString.add(auditCycleList[i]["name"]);
