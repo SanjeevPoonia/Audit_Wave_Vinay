@@ -5650,6 +5650,31 @@ class AuditFormState extends State<AuditFormScreen> {
   }
 
   fetchAuditCycleListEdit(String selectedAuditID) async {
+    var requestModel = {
+      'qm_sheet_id':widget.sheetID
+    };
+    ApiBaseHelper helper = ApiBaseHelper();
+    var response =
+    await helper.postAPIWithHeader('get_audit_cycle_product_wise', requestModel, context);
+    var responseJSON = json.decode(response.body);
+    auditCycleList = responseJSON["details"];
+    for (int i = 0; i < auditCycleList.length; i++) {
+      auditCycleListAsString.add(auditCycleList[i]["name"]);
+      if (auditCycleList[i]["id"].toString() == selectedAuditID) {
+        selectedAuditCycle = auditCycleList[i]["name"];
+      }
+    }
+
+   /* if (auditCycleList.length != 0) {
+      selectedAuditCycle = auditCycleList[0]["name"];
+    }*/
+
+    print("Cycle Data");
+    print(responseJSON);
+    setState(() {});
+  }
+
+  /*fetchAuditCycleListEdit(String selectedAuditID) async {
     var requestModel = {};
     ApiBaseHelper helper = ApiBaseHelper();
     var response =
@@ -5668,7 +5693,7 @@ class AuditFormState extends State<AuditFormScreen> {
     print("Cycle Data");
     print(responseJSON);
     setState(() {});
-  }
+  }*/
 
   fetchLocalData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
