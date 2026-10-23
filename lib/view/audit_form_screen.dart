@@ -53,6 +53,7 @@ class AuditFormScreen extends StatefulWidget {
 class AuditFormState extends State<AuditFormScreen> {
   bool isLoading = false;
   String finalGrade = '';
+  String finalScorePercentage="";
 
   int totalFiles=0;
   int uploadedFiles=0;
@@ -1721,8 +1722,7 @@ class AuditFormState extends State<AuditFormScreen> {
                                                                                                 questionList[pos]["subparameter"][index]["weight"]
                                                                                                     .toString());
 
-                                                                                    weightList[pos][index] =
-                                                                                    "0";
+                                                                                    weightList[pos][index] = "0";
                                                                                     scoredList[pos] =
                                                                                         scoredList[pos] +
                                                                                             0;
@@ -1744,8 +1744,7 @@ class AuditFormState extends State<AuditFormScreen> {
 
                                                                                     // scorableList[pos] = scorableList[pos] - int.parse(questionList[pos]["qm_sheet_sub_parameter"][index]["weight"].toString());
 
-                                                                                    weightList[pos][index] =
-                                                                                    "0";
+                                                                                    weightList[pos][index] = "0";
 
 
                                                                                     print("Scored List "+scoredList[pos].toString());
@@ -3245,9 +3244,7 @@ class AuditFormState extends State<AuditFormScreen> {
           }
 
           print("COLLL");
-
           print(collectionManagerSelected.toString());
-          // prepareData("submit");
           sendOTP("");
         }
 
@@ -3470,6 +3467,23 @@ class AuditFormState extends State<AuditFormScreen> {
     }
 
 
+    String finalScorePercentage=scorableList.length == 0 ? "" : scorableList.reduce((a, b) => a + b) == 0 ? "0.00%" :
+    (scoredList.reduce(
+            (a, b) =>
+        a + b) *
+        100 /
+        scorableList
+            .reduce((a,
+            b) =>
+        a + b))
+        .toStringAsFixed(
+        2) +
+        "%";
+
+    print("final Score Percentage $finalScorePercentage");
+
+    final String old="${scoreInPercentage.reduce((a, b) => a + b).toStringAsFixed(2)}%";
+    print("Old Final Score $old");
 
 
     var requestModel = {
@@ -3506,7 +3520,8 @@ class AuditFormState extends State<AuditFormScreen> {
         "lavel_4": level4IDs,
         "lavel_5": level5IDs,
         "grade": finalGrade,
-        "with_fatal_score_per": "${scoreInPercentage.reduce((a, b) => a + b).toStringAsFixed(2)}%",
+        "with_fatal_score_per": finalScorePercentage,
+        "with_fatal_score_per_old": "${scoreInPercentage.reduce((a, b) => a + b).toStringAsFixed(2)}%",
         "sub_product_ids": selectedSubProductIDsAsString
             .toString()
             .substring(1, selectedSubProductIDsAsString
@@ -3552,7 +3567,8 @@ class AuditFormState extends State<AuditFormScreen> {
         "lavel_4": level4IDs,
         "lavel_5": level5IDs,
         "grade": finalGrade,
-        "with_fatal_score_per": "${scoreInPercentage.reduce((a, b) => a + b).toStringAsFixed(2)}%",
+        "with_fatal_score_per": finalScorePercentage,
+        "with_fatal_score_per_old": "${scoreInPercentage.reduce((a, b) => a + b).toStringAsFixed(2)}%",
         "sub_product_ids": selectedSubProductIDsAsString
             .toString()
             .substring(1, selectedSubProductIDsAsString
